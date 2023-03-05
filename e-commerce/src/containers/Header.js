@@ -3,11 +3,13 @@ import React from "react";
 // define a header
 
 const Header = () => {
-  <div className="ui fixed menu">
-    <div className="ui container center">
-      <h2> Mundane Shop.</h2>
+  return (
+    <div className="ui fixed menu">
+      <div className="ui container center">
+        <h2> Fake Shop.</h2>
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default Header;
