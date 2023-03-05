@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={ProductListing} />
+        <Route path="/" element={<h1>Hello</h1>} />
         <Route path="/product/:productId" element={ProductDetail} />
         <Route>404 not found</Route>
       </Routes>
