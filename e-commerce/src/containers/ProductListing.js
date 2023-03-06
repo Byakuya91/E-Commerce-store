@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import ProductComponent from "./ProductComponent";
 
 const ProductListing = () => {
   // Fetch the product listed in the store.Js
@@ -9,7 +10,7 @@ const ProductListing = () => {
   return (
     <div className="ui grid container">
       {" "}
-      <h1> ProductListing</h1>
+      <ProductComponent />
     </div>
   );
 };
