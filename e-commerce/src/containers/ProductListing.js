@@ -9,9 +9,9 @@ const ProductListing = () => {
   console.log(products);
 
   // TODOs:
-  //  1) Create API function and UseEffect
-  // 2) Test to see if the API is working
-  // 3) Connect the API data to the store inside our Application
+  //  1) Create API function and UseEffect(DONE)
+  // 2) Test to see if the API is working(DONE)
+  // 3) Connect the API data to the store inside our Application(ONGOING)
 
   // 1) API function
   const retrieveProducts = async () => {
