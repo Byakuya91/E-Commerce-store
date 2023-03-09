@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../redux/actions/productActions";
 import axios from "axios";
 import ProductComponent from "./ProductComponent";
 
@@ -8,10 +9,13 @@ const ProductListing = () => {
   const products = useSelector((state) => state);
   console.log(products);
 
+  // Dispatch the action through useDispatch: A redux hook
+  const dispatch = useDispatch();
+
   // TODOs:
   //  1) Create API function and UseEffect(DONE)
   // 2) Test to see if the API is working(DONE)
-  // 3) Connect the API data to the store inside our Application(ONGOING)
+  // 3) Connect the API data to the store inside our Application(DONE)
 
   // 1) API function
   const retrieveProducts = async () => {
@@ -22,14 +26,15 @@ const ProductListing = () => {
       .catch((err) => {
         console.log("Err", err);
       });
-    // checking the response
-    console.log(response.data);
+    // Dispatching an action
+    dispatch(setProducts(response.data));
   };
 
   // 2) Call the retrieveProducts through a UseEffect
   useEffect(() => {
     retrieveProducts();
   }, []);
+  console.log("Products:", products);
 
   return (
     <div className="ui grid container">
