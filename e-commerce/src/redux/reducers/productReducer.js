@@ -14,3 +14,15 @@ export const productReducer = (state = intialState, { type, payload }) => {
       return state;
   }
 };
+
+// takes in two parameters: the state and the action
+// Add reducer to index.js
+export const selectedProductsReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SELECTED_PRODUCT:
+      return { ...state, ...payload };
+    // break;
+    default:
+      return state;
+  }
+};
