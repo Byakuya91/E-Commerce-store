@@ -17,7 +17,6 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetail />} />
         <Route>404 not found</Route>
       </Routes>
-      {/* <ProductComponent /> */}
     </div>
   );
 }
