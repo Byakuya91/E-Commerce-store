@@ -11,7 +11,7 @@ const ProductDetail = () => {
   // TODOS
   // 1) Import Axios(DONE)
   // 2) Make API call to get a SINGLE product(DONE)
-  // 3) Render out the product details(ONGOING)
+  // 3) Render out the product details(DONE)
 
   const { productId } = useParams();
   const product = useSelector((state) => state.product);
