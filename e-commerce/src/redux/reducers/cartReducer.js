@@ -4,7 +4,7 @@ import React from "react";
 import { ActionTypes } from "../constants/action-types";
 
 const cartState = {
-  // array to hold the products and a total
+  // Array to hold the products and the total price
   products: [],
   total: 0,
 };
@@ -14,25 +14,27 @@ export const cartReducer = (state = cartState, action) => {
     case ActionTypes.ADD_TO_CART:
       return {
         ...state,
-        items: [...state.items, action.payload], //? Add the new product to the array
-        total: state.total + action.payload.price, //? Update the total
+        products: [...state.products, action.payload], // Add the new product to the array
+        total: state.total + action.payload.price, // Update the total
       };
 
     case ActionTypes.REMOVE_FROM_CART:
-      const filteredItems = state.items.filter(
+      const filteredProducts = state.products.filter(
         (item) => item.id !== action.payload
       );
-      //   locating the product by ID and removing it
-      const removedItem = state.items.find(
+      // Locate the product by ID to remove it
+      const removedProduct = state.products.find(
         (item) => item.id === action.payload
       );
       return {
         ...state,
-        items: filteredItems, //? Remove the product from the array
-        total: removedItem ? state.total - removedItem.price : state.total, //? Adjust the total
+        products: filteredProducts, // Remove the product from the array
+        total: removedProduct
+          ? state.total - removedProduct.price
+          : state.total, // Adjust the total
       };
 
     default:
-      return state; // Return the current state if action type doesn't match
+      return state; // Return the current state if the action type doesn't match
   }
 };

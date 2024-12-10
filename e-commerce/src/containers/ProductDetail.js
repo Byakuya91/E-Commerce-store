@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+// ? Third party imports
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// ?React imports
+import React, { useEffect } from "react";
+
+// ?Component imports
 import {
   selectedProducts,
   removeSelectedProducts,
 } from "../redux/actions/productActions";
+
+import { addToCart } from "../redux/actions/cartActions";
 
 const ProductDetail = () => {
   // TODOS
@@ -65,7 +72,11 @@ const ProductDetail = () => {
                 </h2>
                 <h3 className="ui brown block header">{category}</h3>
                 <p>{description}</p>
-                <div className="ui vertical animated button" tabIndex="0">
+                <div
+                  className="ui vertical animated button"
+                  tabIndex="0"
+                  onClick={() => dispatch(addToCart(product))}
+                >
                   <div className="hidden content">
                     <i className="shop icon"></i>
                   </div>
