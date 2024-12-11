@@ -5,6 +5,7 @@ import ShoppingCart from "../Components/ShoppingCart";
 
 // ?rrd imports
 import { useNavigate } from "react-router-dom";
+import ProductCard from "../Components/ProductCard/ProductCard";
 
 const ShoppingCartPage = () => {
   const navigateHome = useNavigate();
@@ -14,6 +15,8 @@ const ShoppingCartPage = () => {
       <h1>Shopping Cart</h1>
       <ShoppingCart />
       <button onClick={() => navigateHome("/")}>Back to home</button>
+
+      {/* <ProductCard /> */}
     </div>
   );
 };
