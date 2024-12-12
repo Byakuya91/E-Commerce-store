@@ -11,21 +11,27 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   // TODO: Create navigate function(DONE)
-  const navigateToCart = useNavigate();
+  const navigate = useNavigate();
 
   // TODO: Access the cart from the story
   const cart = useSelector((state) => state.cart);
 
   // TODO: Clickable Shopping Cart Icon(DONE)
   const handleCartClick = () => {
-    navigateToCart("/cart");
+    navigate("/cart");
   };
 
+  // TODO: navigate to the home page
+  const handleLogoClick = () => {
+    navigate("/");
+  };
   // Access the cart from the store
   return (
     <div className="ui fixed menu">
       <div className="ui container center">
-        <h2>Mundane Market</h2>
+        <h2 style={{ cursor: "pointer" }} onClick={handleLogoClick}>
+          Mundane Market
+        </h2>
       </div>
       <div className="right menu">
         {/* Clickable Shopping Cart Icon */}

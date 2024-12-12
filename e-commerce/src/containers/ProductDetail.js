@@ -24,10 +24,10 @@ const ProductDetail = () => {
   const product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
-  console.log(product);
+  // console.log(product);
 
   // Seeing the product ID
-  console.log(productId);
+  // console.log(productId);
 
   // API call
 

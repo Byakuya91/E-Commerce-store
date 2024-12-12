@@ -23,6 +23,11 @@ const ShoppingCart = () => {
     return <div>Your cart is empty!</div>;
   }
 
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
   return (
     <div className="shoppingCart-container">
       {cartItems.map((product) => (
@@ -32,6 +37,9 @@ const ShoppingCart = () => {
           // onRemove={() => handleRemove(product.id)}
         />
       ))}
+      <div className="cart-total">
+        <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+      </div>
     </div>
   );
 };

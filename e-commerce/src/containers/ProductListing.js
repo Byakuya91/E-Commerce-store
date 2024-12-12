@@ -7,7 +7,7 @@ import ProductComponent from "./ProductComponent";
 const ProductListing = () => {
   // Fetch the product listed in the store.Js
   const products = useSelector((state) => state);
-  console.log(products);
+  // console.log(products);
 
   // Dispatch the action through useDispatch: A redux hook
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const ProductListing = () => {
   useEffect(() => {
     retrieveProducts();
   }, []);
-  console.log("Products:", products);
+  // console.log("Products:", products);
 
   return (
     <div className="ui grid container">
