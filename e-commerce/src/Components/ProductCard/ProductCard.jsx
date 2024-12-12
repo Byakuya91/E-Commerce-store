@@ -7,11 +7,26 @@ import "./ProductCard.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../redux/actions/cartActions";
+import { useNavigate } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
 
+  const navigateToProduct = useNavigate();
+
+  // TODO: Create function to navigate back to product details
+  const handleCardClick = () => {
+    // ? prevent navigation if product is null/undefined
+    if (!product) return;
+
+    navigateToProduct(`/product/${product.id}`);
+  };
+
   return (
-    <div className="product-card">
+    <div
+      className="product-card"
+      onClick={handleCardClick} // Navigate when clicking the card
+      style={{ cursor: "pointer" }} // Show pointer cursor
+    >
       <img
         className="product-card__image"
         src={product.image}
@@ -37,7 +52,10 @@ const ProductCard = ({ product }) => {
         </button> */}
         <button
           className="product-card__button"
-          onClick={() => dispatch(removeFromCart(product.id))}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent click bubbling to card
+            dispatch(removeFromCart(product.id));
+          }}
         >
           Remove
         </button>
