@@ -17,3 +17,17 @@ export const removeFromCart = (productId) => {
     payload: productId,
   };
 };
+
+export const incrementQuantity = (productId) => {
+  return {
+    type: ActionTypes.INCREMENT_QUANTITY,
+    payload: productId,
+  };
+};
+
+export const decrementQuantity = (productId) => {
+  return {
+    type: ActionTypes.DECREMENT_QUANTITY,
+    payload: productId,
+  };
+};

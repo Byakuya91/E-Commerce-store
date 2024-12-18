@@ -15,6 +15,7 @@ const ShoppingCart = () => {
 
   // Cart items from redux store
   const cartItems = useSelector((state) => state.cart.products);
+  const itemPrice = useSelector((state) => state.cart.total);
 
   const cartDispatch = useDispatch();
 
@@ -22,11 +23,6 @@ const ShoppingCart = () => {
   if (!cartItems || !cartItems.length) {
     return <div>Your cart is empty!</div>;
   }
-
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
 
   return (
     <div className="shoppingCart-container">
@@ -38,7 +34,7 @@ const ShoppingCart = () => {
         />
       ))}
       <div className="cart-total">
-        <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+        <h2>Total Price: ${itemPrice.toFixed(2)}</h2>
       </div>
     </div>
   );

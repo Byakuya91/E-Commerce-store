@@ -6,7 +6,11 @@ import "./ProductCard.css";
 // redux imports
 
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../redux/actions/cartActions";
+import {
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../../redux/actions/cartActions";
 import { useNavigate } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -38,18 +42,24 @@ const ProductCard = ({ product }) => {
         <p className="product-card__quantity">
           Quantity: {product.quantity || 1}
         </p>
-        {/* <button
+        <button
           className="product-card__button"
-          onClick={() => dispatch(incrementQuantity(product.id))}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent navigation
+            dispatch(incrementQuantity(product.id));
+          }}
         >
           +
         </button>
         <button
           className="product-card__button"
-          onClick={() => dispatch(decrementQuantity(product.id))}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent navigation
+            dispatch(decrementQuantity(product.id));
+          }}
         >
           -
-        </button> */}
+        </button>
         <button
           className="product-card__button"
           onClick={(e) => {
