@@ -8,6 +8,8 @@ import ProductListing from "./containers/ProductListing";
 import ShoppingCartPage from "./Pages/ShoppingCartPage";
 // ?rrd imports
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// ?Other third party imports
+import bootstrap from "bootstrap";
 
 function App() {
   // TODOS;

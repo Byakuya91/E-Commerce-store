@@ -1,7 +1,13 @@
+// ?React imports
 import React, { useEffect, useState } from "react";
+// ?Redux imports
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../redux/actions/productActions";
+
+// ?third party imports
 import axios from "axios";
+import { Vortex } from "react-loader-spinner";
+// ?component imports
 import ProductComponent from "./ProductComponent";
 
 const ProductListing = () => {
@@ -43,14 +49,23 @@ const ProductListing = () => {
   // Checking API and state flow
   // console.log("Products from Redux store:", products);
 
-  if (loading) {
-    return <div>Loading product details...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading product details...</div>;
+  // }
 
   return (
     <div className="ui grid container">
-      {" "}
-      <ProductComponent />
+      {loading ? (
+        <Vortex
+          type="vortex"
+          colors={["#e15b64", "#f47e60", "#f8d663", "#abbd81", "#849b87"]}
+          height={80}
+          width={80}
+          visible={loading}
+        />
+      ) : (
+        <ProductComponent />
+      )}
     </div>
   );
 };
