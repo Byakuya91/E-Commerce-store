@@ -2,6 +2,7 @@
 import React from "react";
 
 // ?component imports
+import SearchBar from "../Components/SearchBar/SearchBar";
 
 // ?Third party imports
 import { useSelector } from "react-redux";
@@ -32,6 +33,9 @@ const Header = () => {
         <h2 style={{ cursor: "pointer" }} onClick={handleLogoClick}>
           Mundane Market
         </h2>
+        <div className="SearchBar-container">
+          <SearchBar />
+        </div>
       </div>
       <div className="right menu">
         {/* Clickable Shopping Cart Icon */}

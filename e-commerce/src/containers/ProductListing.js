@@ -54,19 +54,21 @@ const ProductListing = () => {
   // }
 
   return (
-    <div className="ui grid container">
-      {loading ? (
-        <Vortex
-          type="vortex"
-          colors={["#e15b64", "#f47e60", "#f8d663", "#abbd81", "#849b87"]}
-          height={80}
-          width={80}
-          visible={loading}
-        />
-      ) : (
-        <ProductComponent />
-      )}
-    </div>
+    <>
+      <div className="ui grid container">
+        {loading ? (
+          <Vortex
+            type="vortex"
+            colors={["#e15b64", "#f47e60", "#f8d663", "#abbd81", "#849b87"]}
+            height={80}
+            width={80}
+            visible={loading}
+          />
+        ) : (
+          <ProductComponent />
+        )}
+      </div>
+    </>
   );
 };
 
