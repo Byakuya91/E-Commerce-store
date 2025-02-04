@@ -6,9 +6,10 @@ import { useState } from "react";
 // ?Component imports
 
 // ?third party imports
+import { setSearchQuery } from "../../redux/actions/searchActions";
 
 // ?Redux imports
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {
   // TODO: Hook up Search Bar
@@ -22,20 +23,24 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // ? Access products from redux store
+  const dispatch = useDispatch();
 
   const products = useSelector((state) => state.allProducts.products);
+
+  const searchQuery = useSelector((state) => state.search.query); // Assuming the reducer is set up correctly
 
   // ? Create function to handle search
   const handleSearch = (event) => {
     //  define query for search
     const searchQuery = event.target.value;
+    dispatch(setSearchQuery(searchQuery));
 
     setSearchTerm(searchQuery);
   };
 
   // 4) Filter products based on input
   const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   console.log("The filtered products are: ", filteredProducts);
@@ -45,7 +50,7 @@ const SearchBar = () => {
       <input
         type="search"
         placeholder="Search for products..."
-        value={searchTerm}
+        value={searchQuery}
         onChange={handleSearch}
       />
     </div>

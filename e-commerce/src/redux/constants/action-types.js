@@ -6,6 +6,7 @@ export const ActionTypes = {
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   INCREMENT_QUANTITY: "INCREMENT_QUANTITY",
   DECREMENT_QUANTITY: "DECREMENT_QUANTITY",
+  SET_SEARCH_QUERY: "SET_SEARCH_QUERY",
 };
 
 // These are the action types that will be associated with the actions for Redux.
