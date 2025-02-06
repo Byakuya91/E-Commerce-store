@@ -33,9 +33,9 @@ const Header = () => {
         <h2 style={{ cursor: "pointer" }} onClick={handleLogoClick}>
           Mundane Market
         </h2>
-        <div className="SearchBar-container">
+        {/* <div className="SearchBar-container">
           <SearchBar />
-        </div>
+        </div> */}
       </div>
       <div className="right menu">
         {/* Clickable Shopping Cart Icon */}

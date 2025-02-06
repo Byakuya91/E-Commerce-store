@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProductComponent = () => {
+const ProductComponent = (filteredProducts) => {
   //  TODOS
   // 1)Code out the link to the Product Details page(DONE)
 

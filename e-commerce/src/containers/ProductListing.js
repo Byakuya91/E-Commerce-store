@@ -9,6 +9,7 @@ import axios from "axios";
 import { Vortex } from "react-loader-spinner";
 // ?component imports
 import ProductComponent from "./ProductComponent";
+import SearchBar from "../Components/SearchBar/SearchBar"; // Import SearchBar
 
 const ProductListing = () => {
   // Fetch the product listed in the store.Js
@@ -17,21 +18,19 @@ const ProductListing = () => {
   const dispatch = useDispatch();
   // loading state
   const [loading, setLoading] = useState(true); // Add loading state
-  // Search state
+  // Search state: Now managed here instead of SearchBar
   const searchQuery = useSelector((state) => state.search.query);
+  // SearchBar term
+  const [searchTerm, setSearchTerm] = useState("");
 
   // console.log("the loading state is: ", loading);
 
-  // TODOs:
-  //  1) Create API function and UseEffect(DONE)
-  // 2) Test to see if the API is working(DONE)
-  // 3) Connect the API data to the store inside our Application(DONE)
+  console.log("Redux products state:", products);
 
   // 1) API function
   // ? Fetch products once the component mounts
   useEffect(() => {
     const retrieveProducts = async () => {
-      // console.log("Before API call, loading state:", loading);
       console.time("API fetch time");
       try {
         const response = await axios.get("https://fakestoreapi.com/products");
@@ -41,7 +40,6 @@ const ProductListing = () => {
         console.error("Error fetching products", err);
         setLoading(false); // Ensure loading state is updated even on error
       }
-      // console.log("After API call, loading state:", loading);
       console.timeEnd("API fetch time");
     };
 
@@ -64,12 +62,13 @@ const ProductListing = () => {
     });
   };
 
-  // Checking API and state flow
-  // console.log("Products from Redux store:", products);
-
   return (
     <>
       <div className="ui grid container">
+        {/* Pass setSearchTerm to SearchBar */}
+        <div>
+          <SearchBar />
+        </div>
         {loading ? (
           <Vortex
             type="vortex"
@@ -79,7 +78,9 @@ const ProductListing = () => {
             visible={loading}
           />
         ) : (
-          <ProductComponent products={getFilteredProducts()} />
+          <div className="ProductListing-grid">
+            <ProductComponent filteredProducts={getFilteredProducts()} />
+          </div>
         )}
       </div>
     </>

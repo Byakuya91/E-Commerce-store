@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 // ?third party imports
 import { setSearchQuery } from "../../redux/actions/searchActions";
+import "./SearchBar.css";
 
 // ?Redux imports
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +36,8 @@ const SearchBar = () => {
   // ? Solution filtered products piece of state
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  console.log("The searchQuery is: ", searchQuery);
+  // console.log("The searchQuery is: ", searchQuery);
+  console.log("Local Search Term:", searchTerm);
 
   // ? Create function to handle search
   const handleSearch = (event) => {

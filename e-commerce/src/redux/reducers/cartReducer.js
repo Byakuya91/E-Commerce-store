@@ -9,7 +9,7 @@ const cartState = {
 };
 
 export const cartReducer = (state = cartState, action) => {
-  console.log("Current State:", state);
+  // console.log("Current State:", state);
 
   switch (action.type) {
     case ActionTypes.ADD_TO_CART: {
