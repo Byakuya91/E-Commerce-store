@@ -12,11 +12,13 @@ import ProductComponent from "./ProductComponent";
 
 const ProductListing = () => {
   // Fetch the product listed in the store.Js
-  const products = useSelector((state) => state);
+  const products = useSelector((state) => state.allProducts.products); // Redux products
   // Dispatch the action through useDispatch: A redux hook
   const dispatch = useDispatch();
   // loading state
   const [loading, setLoading] = useState(true); // Add loading state
+  // Search state
+  const searchQuery = useSelector((state) => state.search.query);
 
   // console.log("the loading state is: ", loading);
 
@@ -26,32 +28,44 @@ const ProductListing = () => {
   // 3) Connect the API data to the store inside our Application(DONE)
 
   // 1) API function
-  const retrieveProducts = async () => {
-    // console.log("Before API call, loading state:", loading);
-    console.time("API fetch time");
-    try {
-      const response = await axios.get("https://fakestoreapi.com/products");
-      dispatch(setProducts(response.data));
-      setLoading(false); // Set loading to false once data is fetched
-    } catch (err) {
-      console.error("Error fetching products", err);
-      setLoading(false); // Ensure loading state is updated even on error
-    }
-    // console.log("After API call, loading state:", loading);
-    console.timeEnd("API fetch time");
-  };
-
-  // 2) Call the retrieveProducts through a UseEffect
+  // ? Fetch products once the component mounts
   useEffect(() => {
+    const retrieveProducts = async () => {
+      // console.log("Before API call, loading state:", loading);
+      console.time("API fetch time");
+      try {
+        const response = await axios.get("https://fakestoreapi.com/products");
+        dispatch(setProducts(response.data));
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (err) {
+        console.error("Error fetching products", err);
+        setLoading(false); // Ensure loading state is updated even on error
+      }
+      // console.log("After API call, loading state:", loading);
+      console.timeEnd("API fetch time");
+    };
+
     retrieveProducts();
-  }, []);
+  }, [dispatch]);
+
+  // ?Filter for search(using redux search state)
+  const getFilteredProducts = () => {
+    if (!searchQuery.trim()) return products; // If search is empty, return all products
+
+    const normalizedQuery = searchQuery.toLowerCase().trim();
+
+    return products.filter((product) => {
+      const normalizedTitle = product.title.toLowerCase().trim();
+      return (
+        normalizedTitle.includes(normalizedQuery) ||
+        normalizedTitle.includes(normalizedQuery + "s") || // Handle plural
+        normalizedTitle.includes(normalizedQuery.replace(/s$/, "")) // Handle singular
+      );
+    });
+  };
 
   // Checking API and state flow
   // console.log("Products from Redux store:", products);
-
-  // if (loading) {
-  //   return <div>Loading product details...</div>;
-  // }
 
   return (
     <>
@@ -65,7 +79,7 @@ const ProductListing = () => {
             visible={loading}
           />
         ) : (
-          <ProductComponent />
+          <ProductComponent products={getFilteredProducts()} />
         )}
       </div>
     </>

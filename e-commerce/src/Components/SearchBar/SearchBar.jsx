@@ -28,7 +28,7 @@ const SearchBar = () => {
   // ? Access products from redux store
   const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.allProducts.products);
+  // const products = useSelector((state) => state.allProducts.products);
 
   const searchQuery = useSelector((state) => state.search.query); // Assuming the reducer is set up correctly
 
@@ -40,11 +40,11 @@ const SearchBar = () => {
   // ? Create function to handle search
   const handleSearch = (event) => {
     //  define query for search
-    const searchQuery = event.target.value;
-    dispatch(setSearchQuery(searchQuery));
-    console.log("The search after dispatch is: ", searchQuery);
+    // const searchQuery = event.target.value;
+    dispatch(setSearchQuery(event.target.value));
+    // console.log("The search after dispatch is: ", searchQuery);
 
-    setSearchTerm(searchQuery);
+    // setSearchTerm(searchQuery);
   };
 
   // 4) Filter products based on input
@@ -64,26 +64,26 @@ const SearchBar = () => {
   //   console.log("The filtered products are: ", filteredResults);
   // }, [searchQuery, products]);
 
-  // ? NEW CODE
-  useEffect(() => {
-    if (products.length > 0 && searchQuery.trim() !== "") {
-      const normalizedQuery = searchQuery.toLowerCase().trim();
+  // ? NEW CODE(OUTDATED)
+  // useEffect(() => {
+  //   if (products.length > 0 && searchQuery.trim() !== "") {
+  //     const normalizedQuery = searchQuery.toLowerCase().trim();
 
-      const filteredResults = products.filter((product) => {
-        const normalizedTitle = product.title.toLowerCase().trim();
+  //     const filteredResults = products.filter((product) => {
+  //       const normalizedTitle = product.title.toLowerCase().trim();
 
-        // Check if the normalized title includes the normalized query
-        return (
-          normalizedTitle.includes(normalizedQuery) ||
-          normalizedTitle.includes(normalizedQuery + "s") || // Handle plural
-          normalizedTitle.includes(normalizedQuery.replace(/s$/, "")) // Handle singular
-        );
-      });
+  //       // Check if the normalized title includes the normalized query
+  //       return (
+  //         normalizedTitle.includes(normalizedQuery) ||
+  //         normalizedTitle.includes(normalizedQuery + "s") || // Handle plural
+  //         normalizedTitle.includes(normalizedQuery.replace(/s$/, "")) // Handle singular
+  //       );
+  //     });
 
-      setFilteredProducts(filteredResults);
-      console.log("The filtered products are: ", filteredResults);
-    }
-  }, [searchQuery, products]);
+  //     setFilteredProducts(filteredResults);
+  //     console.log("The filtered products are: ", filteredResults);
+  //   }
+  // }, [searchQuery, products]);
 
   return (
     <div className="SearchBar-Input-Container">
