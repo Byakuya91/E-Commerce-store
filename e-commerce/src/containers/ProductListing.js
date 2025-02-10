@@ -20,8 +20,6 @@ const ProductListing = () => {
   const [loading, setLoading] = useState(true); // Add loading state
   // Search state: Now managed here instead of SearchBar
   const searchQuery = useSelector((state) => state.search.query);
-  // SearchBar term
-  const [searchTerm, setSearchTerm] = useState("");
 
   // console.log("the loading state is: ", loading);
 
@@ -47,20 +45,44 @@ const ProductListing = () => {
   }, [dispatch]);
 
   // ?Filter for search(using redux search state)
+  // const getFilteredProducts = () => {
+  //   if (!searchQuery.trim()) return products; // If search is empty, return all products
+
+  //   const normalizedQuery = searchQuery.toLowerCase().trim();
+
+  //   return products.filter((product) => {
+  //     const normalizedTitle = product.title.toLowerCase().trim();
+  //     return (
+  //       normalizedTitle.includes(normalizedQuery) ||
+  //       normalizedTitle.includes(normalizedQuery + "s") || // Handle plural
+  //       normalizedTitle.includes(normalizedQuery.replace(/s$/, "")) // Handle singular
+  //     );
+  //   });
+
+  // };
+
   const getFilteredProducts = () => {
-    if (!searchQuery.trim()) return products; // If search is empty, return all products
+    if (!searchQuery.trim()) return products;
 
     const normalizedQuery = searchQuery.toLowerCase().trim();
 
-    return products.filter((product) => {
+    const filtered = products.filter((product) => {
       const normalizedTitle = product.title.toLowerCase().trim();
       return (
         normalizedTitle.includes(normalizedQuery) ||
-        normalizedTitle.includes(normalizedQuery + "s") || // Handle plural
-        normalizedTitle.includes(normalizedQuery.replace(/s$/, "")) // Handle singular
+        normalizedTitle.includes(normalizedQuery + "s") ||
+        normalizedTitle.includes(normalizedQuery.replace(/s$/, ""))
       );
     });
+
+    console.log("Filtered Products:", filtered); // Debugging
+    return filtered;
   };
+
+  console.log(
+    "Product Titles:",
+    products.map((p) => p.title)
+  );
 
   return (
     <>

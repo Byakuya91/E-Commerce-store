@@ -41,12 +41,9 @@ const SearchBar = () => {
 
   // ? Create function to handle search
   const handleSearch = (event) => {
-    //  define query for search
-    // const searchQuery = event.target.value;
-    dispatch(setSearchQuery(event.target.value));
-    // console.log("The search after dispatch is: ", searchQuery);
-
-    // setSearchTerm(searchQuery);
+    const query = event.target.value;
+    setSearchTerm(query); // Update local state
+    dispatch(setSearchQuery(query)); // Update Redux state
   };
 
   // 4) Filter products based on input
@@ -92,7 +89,7 @@ const SearchBar = () => {
       <input
         type="search"
         placeholder="Search for products..."
-        value={searchQuery}
+        value={searchTerm}
         onChange={handleSearch}
       />
     </div>
