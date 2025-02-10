@@ -10,6 +10,7 @@ import { Vortex } from "react-loader-spinner";
 // ?component imports
 import ProductComponent from "./ProductComponent";
 import SearchBar from "../Components/SearchBar/SearchBar"; // Import SearchBar
+import ProductCategoryListing from "../Components/ProductCategoryListing/ProductCategoryListing";
 
 const ProductListing = () => {
   // Fetch the product listed in the store.Js
@@ -90,6 +91,7 @@ const ProductListing = () => {
         {/* Pass setSearchTerm to SearchBar */}
         <div>
           <SearchBar />
+          <ProductCategoryListing />
         </div>
         {loading ? (
           <Vortex
