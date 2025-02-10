@@ -46,6 +46,12 @@ const SearchBar = () => {
     dispatch(setSearchQuery(query)); // Update Redux state
   };
 
+  // ? function to clear the search button
+  const clearSearch = () => {
+    setSearchTerm(""); // Update local state
+    dispatch(setSearchQuery("")); // Update Redux state
+  };
+
   // 4) Filter products based on input
   // ? A solution: using a useEffect to change to searchQuery changes to avoid the issue posed above.
   // ?OLD CODE
@@ -92,6 +98,11 @@ const SearchBar = () => {
         value={searchTerm}
         onChange={handleSearch}
       />
+      {searchTerm && ( // Show button only when there's text
+        <button className="clear-btn" onClick={clearSearch}>
+          ✖
+        </button>
+      )}
     </div>
   );
 };
