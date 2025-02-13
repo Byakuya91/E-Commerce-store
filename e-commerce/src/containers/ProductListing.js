@@ -85,6 +85,8 @@ const ProductListing = () => {
     products.map((p) => p.title)
   );
 
+  const filteredProducts = getFilteredProducts();
+
   return (
     <>
       <div className="ui grid container">
@@ -101,6 +103,8 @@ const ProductListing = () => {
             width={80}
             visible={loading}
           />
+        ) : filteredProducts.length === 0 || !filteredProducts ? (
+          <h2>No products found</h2>
         ) : (
           <div className="ProductListing-grid">
             <ProductComponent filteredProducts={getFilteredProducts()} />
