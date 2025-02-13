@@ -84,6 +84,10 @@ const ProductListing = () => {
     "Product Titles:",
     products.map((p) => p.title)
   );
+  console.log(
+    "Product categories:",
+    products.map((p) => p.category)
+  );
 
   const filteredProducts = getFilteredProducts();
 
