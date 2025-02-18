@@ -7,6 +7,7 @@ export const ActionTypes = {
   INCREMENT_QUANTITY: "INCREMENT_QUANTITY",
   DECREMENT_QUANTITY: "DECREMENT_QUANTITY",
   SET_SEARCH_QUERY: "SET_SEARCH_QUERY",
+  SET_CATEGORY: "SET_CATEGORY",
 };
 
 // These are the action types that will be associated with the actions for Redux.

@@ -19,6 +19,9 @@ const ProductListing = () => {
   const dispatch = useDispatch();
   // loading state
   const [loading, setLoading] = useState(true); // Add loading state
+
+  // Selected category for products
+  const [selectedCategory, setSelectedCategory] = useState("All");
   // Search state: Now managed here instead of SearchBar
   const searchQuery = useSelector((state) => state.search.query);
 
@@ -63,21 +66,25 @@ const ProductListing = () => {
   // };
 
   const getFilteredProducts = () => {
-    if (!searchQuery.trim()) return products;
+    //  ?get all products
+    let filteredProducts = products;
 
-    const normalizedQuery = searchQuery.toLowerCase().trim();
+    //? Step 2: Apply search filter (only if there's a search query)
+    if (searchQuery.trim()) {
+      const normalizedQuery = searchQuery.toLowerCase().trim();
 
-    const filtered = products.filter((product) => {
-      const normalizedTitle = product.title.toLowerCase().trim();
-      return (
-        normalizedTitle.includes(normalizedQuery) ||
-        normalizedTitle.includes(normalizedQuery + "s") ||
-        normalizedTitle.includes(normalizedQuery.replace(/s$/, ""))
-      );
-    });
+      filteredProducts = filteredProducts.filter((product) => {
+        const normalizedTitle = product.title.toLowerCase().trim();
+        return (
+          normalizedTitle.includes(normalizedQuery) ||
+          normalizedTitle.includes(normalizedQuery + "s") ||
+          normalizedTitle.includes(normalizedQuery.replace(/s$/, ""))
+        );
+      });
+    }
 
-    console.log("Filtered Products:", filtered); // Debugging
-    return filtered;
+    console.log("Filtered Products:", filteredProducts); // Debugging
+    return filteredProducts;
   };
 
   console.log(
