@@ -21,7 +21,9 @@ const ProductListing = () => {
   const [loading, setLoading] = useState(true); // Add loading state
 
   // Selected category for products
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  // const [selectedCategory, setSelectedCategory] = useState("All");
+  const selectedCategory = useSelector((state) => state.category.category); // ✅ Get from Redux
+
   // Search state: Now managed here instead of SearchBar
   const searchQuery = useSelector((state) => state.search.query);
 
@@ -66,13 +68,21 @@ const ProductListing = () => {
   // };
 
   const getFilteredProducts = () => {
-    //  ?get all products
     let filteredProducts = products;
 
-    //? Step 2: Apply search filter (only if there's a search query)
+    console.log(
+      "The selected category before drop down  is: ",
+      selectedCategory
+    );
+    // ?Apply category filtering if it's not "All"
+    if (selectedCategory !== "All") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === selectedCategory
+      );
+    }
+    // ?Apply search filtering
     if (searchQuery.trim()) {
       const normalizedQuery = searchQuery.toLowerCase().trim();
-
       filteredProducts = filteredProducts.filter((product) => {
         const normalizedTitle = product.title.toLowerCase().trim();
         return (
@@ -82,15 +92,18 @@ const ProductListing = () => {
         );
       });
     }
-
+    console.log(
+      "The selected category after drop down  is: ",
+      selectedCategory
+    );
     console.log("Filtered Products:", filteredProducts); // Debugging
     return filteredProducts;
   };
 
-  console.log(
-    "Product Titles:",
-    products.map((p) => p.title)
-  );
+  // console.log(
+  //   "Product Titles:",
+  //   products.map((p) => p.title)
+  // );
   console.log(
     "Product categories:",
     products.map((p) => p.category)

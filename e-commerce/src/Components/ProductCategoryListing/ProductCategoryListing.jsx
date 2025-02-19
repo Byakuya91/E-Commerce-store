@@ -10,7 +10,7 @@ const categories = [
   "All",
   "men's clothing",
   "women's clothing",
-  "jewelry",
+  "jewelery",
   "electronics",
 ];
 
