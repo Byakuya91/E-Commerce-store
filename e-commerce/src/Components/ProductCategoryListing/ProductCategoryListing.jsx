@@ -3,7 +3,7 @@ import React from "react";
 
 // ? Redux imports
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../redux/actions/categoryActions";
+import { setCategoryFilter } from "../../redux/actions/categoryActions";
 
 // ?STEP ONE: define the categories as a const
 const categories = [
@@ -22,15 +22,18 @@ const ProductCategoryListing = () => {
   // ? use Usedispatch to dispatch category Actions
   const categoryDispatch = useDispatch();
   // ? use useSelector to access the category state
-  const selectedCategory = useSelector(
-    (state) => state.allProducts.selectedCategory
-  );
+  const selectedCategory = useSelector((state) => state.category.category);
 
   // ?STEP FOUR: create a function to handle category change
 
   const handleCategoryChange = (event) => {
-    dispatch(setCategory(event.target.value)); // Send action to Redux
+    categoryDispatch(setCategoryFilter(event.target.value)); // Send action to Redux
   };
+
+  console.log(
+    "Redux State:",
+    useSelector((state) => state)
+  );
 
   return (
     <select value={selectedCategory} onChange={handleCategoryChange}>
