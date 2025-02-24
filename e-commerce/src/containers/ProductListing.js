@@ -27,6 +27,8 @@ const ProductListing = () => {
   // Search state: Now managed here instead of SearchBar
   const searchQuery = useSelector((state) => state.search.query);
 
+  console.log("The searchQuery is: ", searchQuery);
+
   // console.log("the loading state is: ", loading);
 
   console.log("Redux products state:", products);

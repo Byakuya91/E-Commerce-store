@@ -5,14 +5,20 @@ import React from "react";
 import SearchBar from "../Components/SearchBar/SearchBar";
 
 // ?Third party imports
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+// ?Redux imports
+import { setSearchQuery } from "../redux/actions/searchActions";
 
 // define a header
 
 const Header = () => {
   // TODO: Create navigate function(DONE)
   const navigate = useNavigate();
+
+  // TODO: create dispatch function(DONE)
+  const dispatch = useDispatch(); // Add useDispatch to update Redux state
 
   // TODO: Access the cart from the story
   const cart = useSelector((state) => state.cart);
@@ -24,6 +30,8 @@ const Header = () => {
 
   // TODO: navigate to the home page
   const handleLogoClick = () => {
+    // ?! fix for potential search filter problem
+    dispatch(setSearchQuery(""));
     navigate("/");
   };
   // Access the cart from the store
