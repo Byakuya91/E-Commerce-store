@@ -1,10 +1,11 @@
 import React from "react";
 
 const WishList = () => {
+  // TODO: Later, you will map over wishlist items here
   return (
-    <div>
-      <h1>Wishlist Page is Working!</h1>
-      <h1>Wishlist Page is Working!</h1>
+    <div className="wishlist-container">
+      <h1>Wishlist</h1>
+      <p>Your wishlist is empty!</p>
     </div>
   );
 };
