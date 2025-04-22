@@ -2,7 +2,7 @@
 
 
 
-#### **Feature: Cart Management**
+#### **Feature: Cart Management**(COMPLETED)
 1. **As a user, I want to add products to a shopping cart** so that I can review them before purchasing.
 2. **As a user, I want to view the total price of items in my cart** so that I know how much I’m spending.
 
