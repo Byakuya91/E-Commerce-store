@@ -7,6 +7,7 @@ import { setProducts } from "../redux/actions/productActions";
 // ?third party imports
 import axios from "axios";
 import { Vortex } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 // ?component imports
 import ProductComponent from "./ProductComponent";
 import SearchBar from "../Components/SearchBar/SearchBar"; // Import SearchBar
@@ -112,12 +113,17 @@ const ProductListing = () => {
   );
 
   const filteredProducts = getFilteredProducts();
+  // ? Define wishList button
+  const navigateToWishList = useNavigate();
 
   return (
     <>
       <div className="ui grid container">
         {/* Pass setSearchTerm to SearchBar */}
         <div>
+          <button onClick={() => navigateToWishList("/wishlist")}>
+            WishList
+          </button>
           <SearchBar />
           <ProductCategoryListing />
         </div>

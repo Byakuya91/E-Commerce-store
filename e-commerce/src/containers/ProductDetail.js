@@ -82,6 +82,9 @@ const ProductDetail = () => {
                   </div>
                   <div className="visible content">Add to Cart</div>
                 </div>
+                <div>
+                  <button>Add to wishList</button>
+                </div>
               </div>
             </div>
           </div>

@@ -17,6 +17,9 @@ const Header = () => {
   // TODO: Create navigate function(DONE)
   const navigate = useNavigate();
 
+  // TODO: Create navigate to wishList
+  const navigateToWishList = useNavigate();
+
   // TODO: create dispatch function(DONE)
   const dispatch = useDispatch(); // Add useDispatch to update Redux state
 
@@ -41,9 +44,11 @@ const Header = () => {
         <h2 style={{ cursor: "pointer" }} onClick={handleLogoClick}>
           Mundane Market
         </h2>
-        {/* <div className="SearchBar-container">
-          <SearchBar />
-        </div> */}
+      </div>
+      <div>
+        <button onClick={() => navigateToWishList("/wishlist")}>
+          WishList
+        </button>
       </div>
       <div className="right menu">
         {/* Clickable Shopping Cart Icon */}
