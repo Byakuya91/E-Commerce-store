@@ -1,5 +1,3 @@
-import React from "react";
-
 // ? Actions from reducer
 import { ActionTypes } from "../constants/action-types";
 

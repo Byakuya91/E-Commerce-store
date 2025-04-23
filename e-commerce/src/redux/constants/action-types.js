@@ -8,6 +8,8 @@ export const ActionTypes = {
   DECREMENT_QUANTITY: "DECREMENT_QUANTITY",
   SET_SEARCH_QUERY: "SET_SEARCH_QUERY",
   SET_CATEGORY: "SET_CATEGORY",
+  ADD_TO_WISHLIST: "ADD_TO_WISHLIST",
+  REMOVE_FROM_WISHLIST: "REMOVE_FROM_WISHLIST",
 };
 
 // These are the action types that will be associated with the actions for Redux.
