@@ -12,6 +12,9 @@ import {
   removeSelectedProducts,
 } from "../redux/actions/productActions";
 
+// ?Redux imports
+import { addToWishList } from "../redux/actions/wishListActions";
+
 import { addToCart } from "../redux/actions/cartActions";
 
 const ProductDetail = () => {
@@ -23,7 +26,16 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
+
   const dispatch = useDispatch();
+
+  // ? WishList dispatch
+  const wishList = useSelector((state) => state.wishList);
+
+  useEffect(() => {
+    console.log("Wishlist updated:", wishList);
+  }, [wishList]);
+
   // console.log(product);
 
   // Seeing the product ID
@@ -44,7 +56,7 @@ const ProductDetail = () => {
     dispatch(selectedProducts(response.data));
   };
 
-  // useEffect to call retrieveProductDetail
+  //? useEffect to call retrieveProductDetail
   useEffect(() => {
     if (productId && productId !== "") retrieveProductDetail();
 
@@ -83,7 +95,9 @@ const ProductDetail = () => {
                   <div className="visible content">Add to Cart</div>
                 </div>
                 <div>
-                  <button>Add to wishList</button>
+                  <button onClick={() => dispatch(addToWishList(product))}>
+                    Add to wishList
+                  </button>
                 </div>
               </div>
             </div>
