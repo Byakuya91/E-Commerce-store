@@ -8,7 +8,7 @@ const wishListState = {
 
 console.log("the whishList state is: ", wishListState);
 
-export const wishlistReducer = (state = wishListState, action) => {
+export const wishListReducer = (state = wishListState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_TO_WISHLIST: {
       //? Check if the product is already in the wishlist(DONE)

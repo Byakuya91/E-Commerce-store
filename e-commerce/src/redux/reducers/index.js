@@ -4,7 +4,7 @@ import { productReducer, selectedProductsReducer } from "./productReducer";
 import { cartReducer } from "./cartReducer";
 import searchReducer from "./searchReducer";
 import categoryReducer from "./categoryReducer";
-import { wishlistReducer } from "./wishListReducer";
+import { wishListReducer } from "./wishListReducer";
 
 // Create a constant with all the reducers
 const reducers = combineReducers({
@@ -13,7 +13,7 @@ const reducers = combineReducers({
   cart: cartReducer,
   search: searchReducer,
   category: categoryReducer,
-  wishlist: wishlistReducer,
+  wishList: wishListReducer,
 });
 
 export default reducers;

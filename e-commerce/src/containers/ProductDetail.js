@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 // ?React imports
 import React, { useEffect } from "react";
@@ -13,7 +14,10 @@ import {
 } from "../redux/actions/productActions";
 
 // ?Redux imports
-import { addToWishList } from "../redux/actions/wishListActions";
+import {
+  addToWishList,
+  removeFromWishList,
+} from "../redux/actions/wishListActions";
 
 import { addToCart } from "../redux/actions/cartActions";
 
@@ -30,11 +34,26 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
 
   // ? WishList dispatch
-  const wishList = useSelector((state) => state.wishList);
+  // ? convert the products
 
+  const { products: wishList } = useSelector((state) => state.wishList);
+
+  // ? Toggle for add and remove fron wishlist
+
+  const isInWishList = wishList.some((item) => item.id === product.id);
+
+  // ? define the product id:
+
+  // console.log("the wishList before Rendering is: ", wishList);
+
+  // ! useEffects for testing variables and API calls
   useEffect(() => {
     console.log("Wishlist updated:", wishList);
   }, [wishList]);
+
+  useEffect(() => {
+    console.log("Current product in wishList?", isInWishList);
+  }, [isInWishList]);
 
   // console.log(product);
 
@@ -42,6 +61,22 @@ const ProductDetail = () => {
   // console.log(productId);
 
   // API call
+
+  // ? Handler functions
+
+  // Adding and removing from the wishList
+  const handleAddToWishList = () => {
+    dispatch(addToWishList(product));
+  };
+
+  const handleRemoveFromWishList = () => {
+    // Checking if a product.id exists
+    if (!product?.id) {
+      return;
+    } else {
+      dispatch(removeFromWishList(product.id));
+    }
+  };
 
   // Define function for the call
   const retrieveProductDetail = async () => {
@@ -64,6 +99,9 @@ const ProductDetail = () => {
       dispatch(removeSelectedProducts());
     };
   }, [productId]);
+
+  console.log("wishList:", wishList);
+  console.log("isInWishList:", isInWishList);
 
   return (
     <div className="ui grid container">
@@ -95,9 +133,15 @@ const ProductDetail = () => {
                   <div className="visible content">Add to Cart</div>
                 </div>
                 <div>
-                  <button onClick={() => dispatch(addToWishList(product))}>
-                    Add to wishList
-                  </button>
+                  {isInWishList ? (
+                    <button onClick={handleRemoveFromWishList}>
+                      Remove from WishList
+                    </button>
+                  ) : (
+                    <button onClick={handleAddToWishList}>
+                      Add to WishList
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
