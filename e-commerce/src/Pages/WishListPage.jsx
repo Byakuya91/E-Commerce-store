@@ -13,9 +13,8 @@ const WishListPage = () => {
 
   return (
     <main className="wishlist-page">
-      <div className="wWsh-list-Search-Bar-Container">
-        <SearchBar />
-      </div>
+      {/* <SearchBar /> */}
+      <div className="wWsh-list-Search-Bar-Container"></div>
       <section className="wishlist-section">
         <h1>My Wishlist</h1>
         <WishList />
