@@ -30,6 +30,7 @@ const ShoppingCart = () => {
         <ProductCard
           key={product.id}
           product={product}
+          context="cart"
           // onRemove={() => handleRemove(product.id)}
         />
       ))}

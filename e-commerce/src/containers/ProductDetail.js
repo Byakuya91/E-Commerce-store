@@ -80,15 +80,17 @@ const ProductDetail = () => {
 
   // Define function for the call
   const retrieveProductDetail = async () => {
-    // define a response variable and make the call
-    const response = await axios
-      .get(`https://fakestoreapi.com/products/${productId}`)
-      .catch((err) => {
-        console.log("Err", err);
-      });
-
-    // Dispatch the action and add the action
-    dispatch(selectedProducts(response.data));
+    try {
+      // ? API call
+      const response = await axios.get(
+        `https://fakestoreapi.com/products/${productId}`
+      );
+      // ? Dispatch to grab the product
+      dispatch(selectedProducts(response.data));
+    } catch (err) {
+      // ? Error handling
+      console.error("Failed to fetch product detail:", err);
+    }
   };
 
   //? useEffect to call retrieveProductDetail

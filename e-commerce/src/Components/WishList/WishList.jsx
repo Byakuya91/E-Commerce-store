@@ -18,7 +18,7 @@ const WishList = () => {
         <h2>Wishlist is empty</h2>
       ) : (
         wishList.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} context="wishlist" />
         ))
       )}
     </div>

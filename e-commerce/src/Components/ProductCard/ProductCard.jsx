@@ -11,13 +11,20 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "../../redux/actions/cartActions";
+import { removeFromWishList } from "../../redux/actions/wishListActions";
+import { addToCart } from "../../redux/actions/cartActions";
+
+// third party imports
 import { useNavigate } from "react-router-dom";
-const ProductCard = ({ product }) => {
+
+const ProductCard = ({ product, context = "default" }) => {
   const dispatch = useDispatch();
 
   const navigateToProduct = useNavigate();
 
-  // TODO: Create function to navigate back to product details
+  //?Handler functions for the card
+
+  // Cart handler functions for the card
   const handleCardClick = () => {
     // ? prevent navigation if product is null/undefined
     if (!product) return;
@@ -25,11 +32,39 @@ const ProductCard = ({ product }) => {
     navigateToProduct(`/product/${product.id}`);
   };
 
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    dispatch(addToCart(product));
+    // console.log("Added to cart");
+  };
+
+  const handleRemoveFromCart = (e) => {
+    e.stopPropagation();
+    dispatch(removeFromCart(product.id));
+  };
+
+  const handleIncrement = (e) => {
+    e.stopPropagation();
+    dispatch(incrementQuantity(product.id));
+  };
+
+  const handleDecrement = (e) => {
+    e.stopPropagation();
+    dispatch(decrementQuantity(product.id));
+  };
+
+  // Wishlist handler functions
+
+  const handleRemoveFromWishlist = (e) => {
+    e.stopPropagation();
+    dispatch(removeFromWishList(product.id));
+  };
+
   return (
     <div
       className="product-card"
-      onClick={handleCardClick} // Navigate when clicking the card
-      style={{ cursor: "pointer" }} // Show pointer cursor
+      onClick={handleCardClick}
+      style={{ cursor: "pointer" }}
     >
       <img
         className="product-card__image"
@@ -39,36 +74,49 @@ const ProductCard = ({ product }) => {
       <div className="product-card__info">
         <h3 className="product-card__title">{product.title}</h3>
         <p className="product-card__price">${product.price.toFixed(2)}</p>
-        <p className="product-card__quantity">
-          Quantity: {product.quantity || 1}
-        </p>
-        <button
-          className="product-card__button"
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent navigation
-            dispatch(incrementQuantity(product.id));
-          }}
-        >
-          +
-        </button>
-        <button
-          className="product-card__button"
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent navigation
-            dispatch(decrementQuantity(product.id));
-          }}
-        >
-          -
-        </button>
-        <button
-          className="product-card__button"
-          onClick={(e) => {
-            e.stopPropagation(); // Prevent click bubbling to card
-            dispatch(removeFromCart(product.id));
-          }}
-        >
-          Remove
-        </button>
+
+        {/* Buttons depend on context */}
+        {context === "cart" && (
+          <>
+            <p className="product-card__quantity">
+              Quantity: {product.quantity || 1}
+            </p>
+            <button className="product-card__button" onClick={handleIncrement}>
+              +
+            </button>
+            <button className="product-card__button" onClick={handleDecrement}>
+              -
+            </button>
+            <button
+              className="product-card__button"
+              onClick={handleRemoveFromCart}
+            >
+              Remove
+            </button>
+          </>
+        )}
+
+        {context === "wishlist" && (
+          <>
+            <button className="product-card__button" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+            <button
+              className="product-card__button"
+              onClick={handleRemoveFromWishlist}
+            >
+              Remove from Wishlist
+            </button>
+          </>
+        )}
+
+        {context === "default" && (
+          <>
+            <button className="product-card__button" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
